@@ -1,4 +1,4 @@
-import { colors } from "@/styles";
+import { colors } from "@/styles/colors";
 import styled from "styled-components";
 
 export const LoginWrapper = styled.div`

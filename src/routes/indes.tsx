@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./PrivetRoute";
+import LoginPage from "@/features/login/page/LoginPage";
 
 // import Login from "../pages/Login";
 // import Dashboard from "../pages/Dashboard";
@@ -9,7 +10,7 @@ import PrivateRoute from "./PrivetRoute";
 const publicRoutes = [
     {
         path: "/",
-        element: <>i am login</>,
+        element: <LoginPage />,
     },
 ];
 
