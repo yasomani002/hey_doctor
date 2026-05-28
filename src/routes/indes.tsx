@@ -1,11 +1,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./PrivetRoute";
 import LoginPage from "@/features/login/page/LoginPage";
-
-// import Login from "../pages/Login";
-// import Dashboard from "../pages/Dashboard";
-// import Users from "../pages/Users";
-// import NotFound from "../pages/NotFound";
+import Layout from "@/styles/Layout/Layout";
+import { Suspense } from "react";
+import DashbaordPage from "@/features/dashboard/page/DashboardPage";
 
 const publicRoutes = [
     {
@@ -17,7 +15,7 @@ const publicRoutes = [
 const privateRoutes = [
     {
         path: "/dashboard",
-        element: <>i am dashbaord</>,
+        element: <DashbaordPage />
     },
     {
         path: "/users",
@@ -41,13 +39,19 @@ const AppRoutes = () => {
 
                 {/* Private */}
                 <Route element={<PrivateRoute />}>
-                    {privateRoutes.map((route, index) => (
-                        <Route
-                            key={index}
-                            path={route.path}
-                            element={route.element}
-                        />
-                    ))}
+                    <Route element={<Layout />}>
+                        {privateRoutes.map((route, index) => (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <Suspense fallback={<div>loading...</div>}>
+                                        {route.element}
+                                    </Suspense>
+                                }
+                            />
+                        ))}
+                    </Route>
                 </Route>
 
                 {/* 404 */}

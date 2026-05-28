@@ -12,7 +12,7 @@ export const theme = {
     outerBg: "#b8d4e8",          // light powder blue — outer wrapper background
     primary: "#ffffff",          // linear gradient start (unused currently)
     secondary: "#2D6CDF",
-    themeBg: "#c5e2ea",      // accent / button blue
+    themeBg: "#ffffff",      // accent / button blue
 
     main: "#f5f7fa",             // off-white — main content area
     buttonPrimary: "#1e3a4a",
@@ -21,6 +21,7 @@ export const theme = {
 };
 
 export const text = {
+    sidebarBg: "#265368",
     primary: "#333333",
     secondary: "#4B4949",
     white: "#ffffff",
