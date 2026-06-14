@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
+import { useAppSelector } from "@/store/hooks";
 
 const PrivateRoute = () => {
-    const isAuthenticated = localStorage.getItem("token");
-
+    const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
     return isAuthenticated ? <Outlet /> : <Navigate to="/" replace />;
 };
 

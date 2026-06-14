@@ -5,23 +5,33 @@ import CRCButton from "@/components/common/CRCButton"
 import { colors } from "@/styles/colors"
 import { useNavigate } from "react-router-dom"
 import { useSubmitLoginData } from "../hook/useSendLogin";
+import { useAppDispatch } from "@/store/hooks";
+import { loginSuccess } from "@/store/slices/authSlice";
 
 const LoginForm = () => {
     const { register, handleSubmit, formState: { errors } } = useForm()
     const { mutate: submitLoginData } = useSubmitLoginData();
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
     const onSubmit = (data: any) => {
-        localStorage.setItem("token", "dummy_token");
         submitLoginData(data, {
-            onSuccess: (data) => {
-                console.log(data)
-                navigate("/")
+            onSuccess: (res) => {
+                if (res?.data) {
+                    dispatch(loginSuccess({
+                        user: {
+                            user_role: res.data.user_role,
+                            user_name: res.data.user_name,
+                            permissions: res.data.permissions
+                        },
+                        token: res.data.token
+                    }))
+                }
+                navigate("/dashboard")
             },
             onError: (error) => {
                 console.log(error);
             }
         })
-        navigate("/dashboard")
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>

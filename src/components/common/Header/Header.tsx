@@ -5,6 +5,9 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/compon
 import { useState } from "react";
 import { User } from "lucide-react";
 import { Title } from "@radix-ui/react-toast";
+import { logout } from "@/store/slices/authSlice";
+import { useAppDispatch } from "@/store/hooks";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
     currentPage?: string;
@@ -24,7 +27,30 @@ const Header = ({
     showHome,
     middlePages
 }: Props) => {
+    const navigate = useNavigate();
     const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
+
+    const dropDownData = [
+        {
+            name: "Profile",
+            link: "/profile",
+            icon: <User size={20} color="gray" className="mr-2" />,
+            onClick: () => { }
+        },
+        {
+            name: "Logout",
+            link: "/logout",
+            icon: <User size={20} color="gray" className="mr-2" />,
+            onClick: () => userLogout()
+        }
+    ]
+
+    const dispatch = useAppDispatch();
+    const userLogout = () => {
+        dispatch(logout());
+
+        navigate("/");
+    }
 
     return (
         <HeaderContainer>
@@ -58,16 +84,18 @@ const Header = ({
                     <a href={`mailto:supportEmail`} className="text-sm text-gray-500 hover:text-primary cursor-pointer"  >
                         test@gmail.com
                     </a>
-
-                    <div className="flex items-center w-full justify-between">
-                        <div
-                            className="flex items-center cursor-pointer"
-                            onClick={() => { }}
-                        >
-                            <User size={20} color="gray" className="mr-2" />
-                            <span>My Profile</span>
-                        </div>
-                    </div>
+                    {
+                        dropDownData.map((item) => (
+                            <div
+                                key={item.name}
+                                className="flex items-center cursor-pointer"
+                                onClick={() => item.onClick()}
+                            >
+                                {item.icon}
+                                <span>{item.name}</span>
+                            </div>
+                        ))
+                    }
                 </DropdownMenuContent>
             </DropdownMenu>
         </HeaderContainer>

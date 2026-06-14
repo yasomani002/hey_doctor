@@ -1,4 +1,3 @@
-// LayoutStyles.ts
 import { colors } from "@/styles/colors";
 import styled from "styled-components";
 
@@ -9,7 +8,7 @@ export const LayoutWrapper = styled.div`
   height: 100svh;
   overflow: hidden;
   position: relative;
-  background-color: ${colors.theme.outerBg};
+  background-color: ${colors.theme.sidebarBg};
   gap: 0;
 
   /* Responsive adjustments */
