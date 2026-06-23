@@ -1,5 +1,5 @@
 import { BreadcrumbComponent } from "@/components/BreadcrumbComponent"
-import { HeaderContainer } from "./headerStyle"
+import { HeaderContainer } from "./HeaderStyle"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
