@@ -1,13 +1,14 @@
 import { BreadcrumbComponent } from "@/components/BreadcrumbComponent"
-import { HeaderContainer } from "./HeaderStyle"
+import { HeaderContainer, HeaderProfileBox, MenuListBox } from "./HeaderStyle"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
-import { User } from "lucide-react";
-import { Title } from "@radix-ui/react-toast";
+import { LogOutIcon, UserIcon } from "lucide-react";
 import { logout } from "@/store/slices/authSlice";
 import { useAppDispatch } from "@/store/hooks";
 import { useNavigate } from "react-router-dom";
+import Text from "../Text";
+import { colors } from "@/styles/colors";
 
 type Props = {
     currentPage?: string;
@@ -30,20 +31,10 @@ const Header = ({
     const navigate = useNavigate();
     const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
 
-    const dropDownData = [
-        {
-            name: "Profile",
-            link: "/profile",
-            icon: <User size={20} color="gray" className="mr-2" />,
-            onClick: () => { }
-        },
-        {
-            name: "Logout",
-            link: "/logout",
-            icon: <User size={20} color="gray" className="mr-2" />,
-            onClick: () => userLogout()
-        }
-    ]
+    const handleProfileClick = () => {
+        navigate("/profile");
+    }
+
 
     const dispatch = useAppDispatch();
     const userLogout = () => {
@@ -51,6 +42,19 @@ const Header = ({
 
         navigate("/");
     }
+
+    const menuListArray = [
+        {
+            title: "My Profile",
+            icon: <UserIcon className="mr-2" />,
+            onClick: handleProfileClick
+        },
+        {
+            title: "Logout",
+            icon: <LogOutIcon className="mr-2" />,
+            onClick: () => userLogout()
+        }
+    ]
 
     return (
         <HeaderContainer>
@@ -70,32 +74,39 @@ const Header = ({
                 <DropdownMenuTrigger asChild className="cursor-pointer">
 
                     <Avatar className="h-8 w-8">
-                        <AvatarFallback className="h-8 w-8 text-white bold bg-primary">
-                            YS
+                        <AvatarFallback className="h-8 w-8 bold bg-primary">
+                            <Text fontSize={"14px"} color={colors.text.white}>Ys</Text>
                         </AvatarFallback>
                     </Avatar>
-
                 </DropdownMenuTrigger>
-
                 <DropdownMenuContent className="w-64 rounded-1 p-3" align="end" forceMount>
-                    <Title className="cursor-pointer hover:text-primary" onClick={() => { }}>
-                        Admin
-                    </Title>
-                    <a href={`mailto:supportEmail`} className="text-sm text-gray-500 hover:text-primary cursor-pointer"  >
-                        test@gmail.com
-                    </a>
-                    {
-                        dropDownData.map((item) => (
-                            <div
-                                key={item.name}
-                                className="flex items-center cursor-pointer"
-                                onClick={() => item.onClick()}
-                            >
-                                {item.icon}
-                                <span>{item.name}</span>
-                            </div>
-                        ))
-                    }
+
+                    {/* company name */}
+                    <HeaderProfileBox>
+
+                        <Avatar className="h-10 w-10">
+                            <AvatarFallback className="h-8 w-8 bold bg-primary">
+                                <Text fontSize={"16px"} color={colors.text.white}>YS</Text>
+                            </AvatarFallback>
+                        </Avatar>
+                        <div className=" flex flex-col max-w-[80%]">
+                            <Text fontWeight="bold" fontSize="14px" truncate={true}>Merchant Name</Text>
+                            <Text fontSize="14px" truncate={true}>support@demo.com</Text>
+                        </div>
+
+                    </HeaderProfileBox>
+
+                    {/* menu list */}
+                    {menuListArray?.map((menu, index) => (
+                        <MenuListBox
+                            key={index}
+                            className="flex items-center cursor-pointer"
+                            onClick={menu.onClick}
+                        >
+                            {menu.icon}
+                            <Text>{menu.title}</Text>
+                        </MenuListBox>
+                    ))}
                 </DropdownMenuContent>
             </DropdownMenu>
         </HeaderContainer>
