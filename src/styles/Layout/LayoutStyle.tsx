@@ -41,7 +41,7 @@ export const MainContainer = styled.main`
   flex-direction: column;
   min-width: 0;
   background-color: ${colors.theme.themeBg};
-  // padding: 10px 15px 0px 15px;
+  padding:8px;
   overflow: hidden;
 
   @media (max-width: 768px) {

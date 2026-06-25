@@ -47,7 +47,7 @@ const dummyData = {
             },
             {
                 "nav_menu_id": "appointment",
-                "nav_menu_name": "Appointment",
+                "nav_menu_name": "Operations",
                 "nav_path": "/appointment",
                 "is_active": true,
                 "is_visible": true,

@@ -69,7 +69,7 @@ export function AppSidebar() {
                     </div>
 
                     <SidebarGroupContent>
-                        <SidebarMenu className="text-white gap-y-2 flex flex-col items-center">
+                        <SidebarMenu className="text-white gap-y-3 flex flex-col items-center">
                             {menuBar.map((item) => {
                                 const hasSubMenu =
                                     item.sub_menu?.length > 0;
@@ -97,7 +97,7 @@ export function AppSidebar() {
                                         <SidebarMenuItem
                                             className={
                                                 isCollapsed
-                                                    ? "w-auto flex justify-center"
+                                                    ? "w-auto flex justify-center "
                                                     : "w-[90%]"
                                             }
                                         >
@@ -141,7 +141,7 @@ export function AppSidebar() {
                                                     const isSubActive = location.pathname === subItem.nav_path;
 
                                                     return (
-                                                        <SidebarMenuItem key={subItem.nav_menu_name} className="w-[75%] ml-8 mt-1">
+                                                        <SidebarMenuItem key={subItem.nav_menu_name} className="w-[75%] ml-11 mt-2">
                                                             <SidebarMenuButton
                                                                 asChild
                                                                 isActive={isSubActive}

@@ -6,5 +6,5 @@ export const SubHeaderContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px;
+    padding: 0 0 8px 0;
 `
