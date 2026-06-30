@@ -39,7 +39,7 @@ export const table = {
     border: "#e5e7eb",
     background: "#ffffff",
     hover: "#e2e9f2",
-    header: "#b7cde9",
+    header: "#265368",
 }
 
 export const statusColors = {

@@ -81,10 +81,10 @@ export const BodyRow = styled.tr<{ translateYPx: number; isAlt: boolean; rowHeig
   top: 0;
   left: 0;
   ${(props) =>
-        props.rowHeightPx
-            ? `height: ${props.rowHeightPx}px;`
-            : `min-height: ${ROLE_ROW_HEIGHT_PX}px;`
-    }
+    props.rowHeightPx
+      ? `height: ${props.rowHeightPx}px;`
+      : `min-height: ${ROLE_ROW_HEIGHT_PX}px;`
+  }
   align-items: center;
   transform: translateY(${(props) => props.translateYPx}px);
   background-color: ${colors.table.background}; 

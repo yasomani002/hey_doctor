@@ -238,7 +238,7 @@ const Table = <T,>({
                   }}
                   className={isDraggable && !isFixedColumnKey(col.key) ? "cursor-move" : undefined + " " + col.className}
                 >
-                  <Text as="p" fontSize="12px" fontWeight="700" truncate={true} className="max-w-[90%]">{col.name}</Text>
+                  <Text as="p" fontSize="12px" fontWeight="700" truncate={true} className="max-w-[90%]" color="white">{col.name}</Text>
                 </HeaderCell>
               ))}
             </HeaderRow>
