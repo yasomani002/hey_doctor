@@ -1,6 +1,6 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
-import authReducer from "./slices/authSlice";
+import authReducer, { logout } from "./slices/authSlice";
 
 // Custom storage adapter — fixes Vite ESM incompatibility with redux-persist/lib/storage
 const localStorageAdapter = {
@@ -16,10 +16,20 @@ const authPersistConfig = {
 
 const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
+const appReducer = combineReducers({
+  auth: persistedAuthReducer,
+});
+
+const rootReducer = (state: ReturnType<typeof appReducer> | undefined, action: any) => {
+  if (action.type === logout.type) {
+    localStorage.removeItem("persist:auth");
+    state = undefined;
+  }
+  return appReducer(state, action);
+};
+
 export const store = configureStore({
-  reducer: {
-    auth: persistedAuthReducer,
-  },
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

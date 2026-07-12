@@ -1,19 +1,13 @@
-import Header from "@/components/common/Header/Header"
-import SubHeader from "@/components/common/SubHeader/SubHeader"
-import { Button } from "@/components/ui/button"
-import { useState } from "react"
-import CreateAppointmentDialog from "../component/CreateAppointmentDialog"
-import { Table, Text } from "@/components/common"
-import useGetAppoinmentList from "../hook/useGetAppoinmentList"
+import { Table, Text } from "@/components/common";
+import Header from "@/components/common/Header/Header";
+import SubHeader from "@/components/common/SubHeader/SubHeader";
+import { Button } from "@/components/ui/button";
+import useGetPatientHistoryList from "../hook/useGetPatientHistoryList";
 
-const AppoinmentPage = () => {
-    const [createAppointmentOpen, setCreateAppointmentOpen] = useState(false)
+const PatientHistoryPage = () => {
 
-    const { data, isLoading } = useGetAppoinmentList()
+    const { data, isLoading } = useGetPatientHistoryList()
     const appoinmentData = data?.data?.data || []
-    const handleCreateAppointment = () => {
-        setCreateAppointmentOpen(true)
-    }
 
     const columns = [
         {
@@ -75,15 +69,18 @@ const AppoinmentPage = () => {
             render: (row: any,) => row.created_at
         },
     ]
+    const handleAddPatient = () => {
+        console.log("Create Appointment");
+    };
     return (
         <>
             <Header
-                currentPage="Appointments"
+                currentPage="Patient History"
                 mainPage="Operations"
             />
             <SubHeader>
                 <div></div>
-                <Button onClick={handleCreateAppointment} className="cursor-pointer">Add Appointment</Button>
+                <Button onClick={handleAddPatient} className="cursor-pointer">Add Patient</Button>
             </SubHeader>
 
             <Table
@@ -92,16 +89,8 @@ const AppoinmentPage = () => {
                 isLoading={isLoading}
                 emptyMessage="No Appointments Found"
             />
-
-            {/* create appointment dialog */}
-            {createAppointmentOpen &&
-                <CreateAppointmentDialog
-                    open={createAppointmentOpen}
-                    onClose={() => setCreateAppointmentOpen(false)}
-                />
-            }
         </>
-    )
-}
+    );
+};
 
-export default AppoinmentPage
+export default PatientHistoryPage;

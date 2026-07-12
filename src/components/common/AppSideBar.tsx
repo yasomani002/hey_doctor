@@ -29,7 +29,7 @@ import Text from "./Text";
 
 import { useSelector } from "react-redux";
 import type { RootState } from "@/store/store";
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 export function AppSidebar() {
     const location = useLocation();
@@ -42,19 +42,31 @@ export function AppSidebar() {
         (state: RootState) => state.auth
     );
 
-    const menuBar =
-        user?.permissions?.map((permission) => ({
+    const menuBar = useMemo(() => {
+        return user?.permissions?.map((permission) => ({
             title: permission.nav_menu_name,
-
-            // Redirect parent to first submenu if exists
-            url:
-                permission.sub_menu?.length > 0
-                    ? permission.sub_menu[0].nav_path
-                    : permission.nav_path,
-
+            url: permission.nav_path,
             sub_menu: permission.sub_menu || [],
             icon: ShoppingCart,
         })) || [];
+    }, [user?.permissions]);
+
+    const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({});
+
+    // Sync menu open state when route changes
+    useEffect(() => {
+        const initialOpen: Record<string, boolean> = {};
+        menuBar.forEach((item) => {
+            const hasSubMenu = item.sub_menu?.length > 0;
+            const isChildActive = item.sub_menu?.some(
+                (sub) => sub.nav_path === location.pathname
+            );
+            if (hasSubMenu && isChildActive) {
+                initialOpen[item.title] = true;
+            }
+        });
+        setOpenMenus((prev) => ({ ...prev, ...initialOpen }));
+    }, [location.pathname, menuBar]);
 
     return (
         <Sidebar collapsible="icon">
@@ -74,23 +86,27 @@ export function AppSidebar() {
                                 const hasSubMenu =
                                     item.sub_menu?.length > 0;
 
+                                const isOpen = !!openMenus[item.title];
+
                                 const isParentActive =
-                                    location.pathname === item.url ||
+                                    (item.url && location.pathname === item.url) ||
                                     item.sub_menu?.some(
                                         (sub) =>
                                             sub.nav_path ===
                                             location.pathname
-                                    );
-
-                                const [open, setOpen] = useState(
-                                    isParentActive
-                                );
+                                    ) ||
+                                    isOpen;
 
                                 return (
                                     <Collapsible
                                         key={item.title}
-                                        open={open}
-                                        onOpenChange={setOpen}
+                                        open={isOpen}
+                                        onOpenChange={(nextOpen) => {
+                                            setOpenMenus((prev) => ({
+                                                ...prev,
+                                                [item.title]: nextOpen,
+                                            }));
+                                        }}
                                         className="w-full flex flex-col items-center"
                                     >
                                         {/* Parent Menu */}
@@ -110,8 +126,10 @@ export function AppSidebar() {
                                                     className="flex items-center justify-between w-full cursor-pointer"
                                                     onClick={() => {
                                                         if (hasSubMenu) {
-                                                            setOpen(!open);
-                                                            navigate(item.sub_menu[0].nav_path);
+                                                            setOpenMenus((prev) => ({
+                                                                ...prev,
+                                                                [item.title]: !prev[item.title],
+                                                            }));
                                                         } else {
                                                             navigate(item.url);
                                                         }
@@ -128,7 +146,7 @@ export function AppSidebar() {
                                                     </div>
 
                                                     {!isCollapsed && hasSubMenu && (
-                                                        <ChevronDownIcon size={18} className={`transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
+                                                        <ChevronDownIcon size={18} className={`transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
                                                     )}
                                                 </div>
                                             </SidebarMenuButton>

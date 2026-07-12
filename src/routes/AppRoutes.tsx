@@ -5,6 +5,7 @@ import Layout from "@/styles/Layout/Layout";
 import { Suspense } from "react";
 import DashbaordPage from "@/features/dashboard/page/DashboardPage";
 import AppoinmentPage from "@/features/appointment/page/AppoinmentPage";
+import PatientHistoryPage from "@/features/patient_history/page/PatientHistoryPage";
 
 const publicRoutes = [
     {
@@ -39,6 +40,11 @@ const privateRoutes = [
                 element: <>Add Appointment</>,
             },
         ],
+    },
+    {
+        path: "/patient-history",
+        element: <PatientHistoryPage />,
+        submenu: [],
     },
 ];
 

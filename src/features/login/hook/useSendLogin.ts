@@ -75,18 +75,21 @@ const dummyData = {
                             4
                         ]
                     },
-                    // {
-                    //     "nav_menu_id": "appointment-history",
-                    //     "nav_menu_name": "History",
-                    //     "nav_path": "/history",
-                    //     "is_active": true,
-                    //     "is_visible": false,
-                    //     "nav_order": 2,
-                    //     "level": 2,
-                    //     "actions": [
-                    //         1
-                    //     ]
-                    // },
+                    {
+                        "nav_menu_id": "patient-history",
+                        "nav_menu_name": "Patient History",
+                        "nav_path": "/patient-history",
+                        "is_active": true,
+                        "is_visible": true,
+                        "nav_order": 2,
+                        "level": 2,
+                        "actions": [
+                            1,
+                            2,
+                            3,
+                            4
+                        ]
+                    },
                     // {
                     //     "nav_menu_id": "notes",
                     //     "nav_menu_name": "Notes",
