@@ -2,8 +2,8 @@ import Header from "@/components/common/Header/Header"
 import SubHeader from "@/components/common/SubHeader/SubHeader"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
-import CreateAppointment from "../component/CreateAppointment"
-import { Table } from "@/components/common"
+import CreateAppointmentDialog from "../component/CreateAppointmentDialog"
+import { Table, Text } from "@/components/common"
 import useGetAppoinmentList from "../hook/useGetAppoinmentList"
 
 const AppoinmentPage = () => {
@@ -35,63 +35,37 @@ const AppoinmentPage = () => {
             name: "Mobile",
             minWidth: "150px",
             flexGrow: "0.5",
-            render: (row: any,) => row.patient_mobile
+            render: (row: any,) => (<Text fontSize="12px" >{row.patient_mobile}</Text>)
         },
         {
-            key: "patient_email",
-            name: "Email",
+            key: "patient_gender",
+            name: "Gender",
             minWidth: "150px",
             flexGrow: "0.5",
-            render: (row: any,) => row.patient_email
+            render: (row: any,) => (
+                <>
+                    <Text fontSize="12px" >{row.gender} - {row.age}</Text>
+                </>
+            )
         },
         {
-            key: "doctor_name",
-            name: "Doctor Name",
+            key: "date_of_birth",
+            name: "Date of Birth",
             minWidth: "150px",
             flexGrow: "0.5",
-            render: (row: any,) => row.doctor_name
-        },
-        {
-            key: "department_name",
-            name: "Department",
-            minWidth: "150px",
-            flexGrow: "0.5",
-            render: (row: any,) => row.department_name
+            render: (row: any) => row.date_of_birth
         },
         {
             key: "appointment_date",
             name: "Date",
             minWidth: "150px",
             flexGrow: "0.5",
-            render: (row: any,) => row.appointment_date
-        },
-        {
-            key: "appointment_time",
-            name: "Time",
-            minWidth: "150px",
-            flexGrow: "0.5",
-            render: (row: any,) => row.appointment_time
-        },
-        {
-            key: "appointment_type",
-            name: "Type",
-            minWidth: "150px",
-            flexGrow: "0.5",
-            render: (row: any,) => row.appointment_type
-        },
-        {
-            key: "appointment_status",
-            name: "Status",
-            minWidth: "150px",
-            flexGrow: "0.5",
-            render: (row: any,) => row.appointment_status
-        },
-        {
-            key: "appointment_notes",
-            name: "Notes",
-            minWidth: "150px",
-            flexGrow: "0.5",
-            render: (row: any,) => row.appointment_notes
+            render: (row: any,) => (
+                <>
+                    <Text fontSize="12px" >{row.appointment_date}</Text>
+                    <Text fontSize="10px">{row.appointment_time}</Text>
+                </>
+            )
         },
         {
             key: "created_at",
@@ -99,13 +73,6 @@ const AppoinmentPage = () => {
             minWidth: "150px",
             flexGrow: "0.5",
             render: (row: any,) => row.created_at
-        },
-        {
-            key: "updated_at",
-            name: "Updated At",
-            minWidth: "150px",
-            flexGrow: "0.5",
-            render: (row: any,) => row.updated_at
         },
     ]
     return (
@@ -116,7 +83,7 @@ const AppoinmentPage = () => {
             />
             <SubHeader>
                 <div></div>
-                <Button onClick={handleCreateAppointment}>Create Appointment</Button>
+                <Button onClick={handleCreateAppointment} className="cursor-pointer">Create Appointment</Button>
             </SubHeader>
 
             <Table
@@ -129,7 +96,7 @@ const AppoinmentPage = () => {
 
             {/* create appointment dialog */}
             {createAppointmentOpen &&
-                <CreateAppointment
+                <CreateAppointmentDialog
                     open={createAppointmentOpen}
                     onClose={() => setCreateAppointmentOpen(false)}
                 />

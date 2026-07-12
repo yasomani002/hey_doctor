@@ -1,17 +1,19 @@
+import { colors } from "@/styles/colors"
 import Text from "../Text"
 
 interface Props {
+    required?: boolean
     label: string
     children: React.ReactNode
     error?: string
 }
 
-const InputBox = ({ label, children, error }: Props) => {
+const InputBox = ({ label, children, error, required }: Props) => {
     return (
         <div>
-            <label>{label}</label>
+            <label>{label} {required && <span className="text-red-500">*</span>}</label>
             {children}
-            {error && <Text className="text-red-500">{error}</Text>}
+            {error && <Text fontSize="10px" color={colors.text.rejected} className="mt-1">{error}</Text>}
         </div>
     )
 }

@@ -7,7 +7,7 @@ export const CreateAppoinmentSchema = z.object({
     age: z.number().min(1, "Age is required"),
     date_of_birth: z.string().min(1, "Date of Birth is required"),
     appointment_date: z.string().min(1, "Appointment Date is required"),
-    appointment_time: z.string().min(1, "Appointment Time is required"),
+    appointment_time: z.string().optional(),
     symptoms: z.string().optional(),
 })
 

@@ -14,10 +14,11 @@ interface DatePickerProps {
     disabled?: boolean
     /** Format string for displaying the date. Defaults to "PPP" (e.g. June 23rd, 2026) */
     dateFormat?: string
+    minDate?: Date | undefined
 }
 
 const DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(
-    ({ value, onChange, placeholder = "Pick a date", className, disabled, dateFormat = "PPP" }, ref) => {
+    ({ value, onChange, placeholder = "Pick a date", className, disabled, dateFormat = "PPP", minDate }, ref) => {
         const [open, setOpen] = React.useState(false)
 
         return (
@@ -45,6 +46,7 @@ const DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(
                             onChange?.(date)
                             setOpen(false)
                         }}
+                        disabled={(date) => !!minDate && date < minDate}
                     // initialFocus
                     />
                 </PopoverContent>
