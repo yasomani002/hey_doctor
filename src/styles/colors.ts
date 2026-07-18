@@ -8,7 +8,7 @@
 
 // theme colors
 export const theme = {
-    sidebarBg: "#265368",        // dark teal — sidebar background
+    sidebarBg: "#1e3a3a",        // dark teal — sidebar background
     outerBg: "#b8d4e8",          // light powder blue — outer wrapper background
     primary: "#ffffff",          // linear gradient start (unused currently)
     secondary: "#2D6CDF",

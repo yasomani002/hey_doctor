@@ -69,7 +69,7 @@ const PatientDetailsDrawe = ({ open, onClose }: props) => {
                     <Divider />
                     <Tab tabs={TABS} activeTab="patient_details" onChange={() => { }} />
                     <div className="flex flex-col gap-2 ">
-                        {patientDetails.map((item, index) => (
+                        {patientDetails.map((item) => (
                             <>
                                 {labelValueComponent(item.label, item.value)}
                             </>

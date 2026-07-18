@@ -10,23 +10,12 @@ import {
     SidebarTrigger,
     useSidebar,
 } from "@/components/ui/sidebar";
-
-import {
-    Collapsible,
-    CollapsibleContent,
-} from "@/components/ui/collapsible";
-
+import { Collapsible, CollapsibleContent } from "@/components/ui/collapsible";
 import companyLogo from "@/assets/images/companylogo.png";
-import {
-    ChevronDownIcon,
-    LucideListTree,
-    ShoppingCart,
-} from "lucide-react";
-
+import { ChevronDownIcon, LucideListTree, ShoppingCart, } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import CRCImage from "./CRCImage";
 import Text from "./Text";
-
 import { useSelector } from "react-redux";
 import type { RootState } from "@/store/store";
 import { useState, useEffect, useMemo } from "react";
