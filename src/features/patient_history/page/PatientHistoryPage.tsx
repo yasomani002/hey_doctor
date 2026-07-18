@@ -3,11 +3,17 @@ import Header from "@/components/common/Header/Header";
 import SubHeader from "@/components/common/SubHeader/SubHeader";
 import { Button } from "@/components/ui/button";
 import useGetPatientHistoryList from "../hook/useGetPatientHistoryList";
+import PatientDetailsDrawe from "../component/PatientDetailsDrawe";
+import { useState } from "react";
 
 const PatientHistoryPage = () => {
-
+    const [detailsDrawerOpen, setDetiailsDrawerOpen] = useState(false)
     const { data, isLoading } = useGetPatientHistoryList()
     const appoinmentData = data?.data?.data || []
+
+    const handleOpenDetailsDrawer = () => {
+        setDetiailsDrawerOpen(true)
+    }
 
     const columns = [
         {
@@ -69,9 +75,10 @@ const PatientHistoryPage = () => {
             render: (row: any,) => row.created_at
         },
     ]
+
     const handleAddPatient = () => {
-        console.log("Create Appointment");
-    };
+        console.log('hi')
+    }
     return (
         <>
             <Header
@@ -84,11 +91,16 @@ const PatientHistoryPage = () => {
             </SubHeader>
 
             <Table
-                config={{ columns }}
+                config={{
+                    columns,
+                    onRowClick: () => handleOpenDetailsDrawer()
+                }}
                 data={appoinmentData}
                 isLoading={isLoading}
                 emptyMessage="No Appointments Found"
             />
+
+            <PatientDetailsDrawe open={detailsDrawerOpen} onClose={() => setDetiailsDrawerOpen(false)} />
         </>
     );
 };
