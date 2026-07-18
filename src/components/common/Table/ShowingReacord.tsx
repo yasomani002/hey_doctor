@@ -55,22 +55,26 @@ interface ShowingRecordProps {
   ) => void;
   columnVisibilityMenu?: React.ReactNode;
   paginationProps?: boolean;
+  recordLabel?: string;
 }
 
 export const ShowingRecord =
   forwardRef<
     HTMLDivElement,
     ShowingRecordProps
-  >(({
-    total,
-    page,
-    pageSize,
-    onPageChange,
-    isLoading,
-    setRowsPerPageStatic,
-    columnVisibilityMenu,
-    paginationProps,
-  },
+  >((
+    {
+      total,
+      page,
+      pageSize,
+      onPageChange,
+      isLoading,
+      setRowsPerPageStatic,
+      columnVisibilityMenu,
+      paginationProps,
+      recordLabel = "records",
+      current,
+    },
     ref
   ) => {
 
@@ -219,15 +223,12 @@ export const ShowingRecord =
           </div>
         )}
 
-        {/* Total Records */}
-        {paginationProps && (
-          <ShowingRecordText>
-            <Text as="span" fontSize="12px">
-              Total Records :{" "}
-              {total}
-            </Text>
-          </ShowingRecordText>
-        )}
+        {/* Total Records — always shown */}
+        <ShowingRecordText>
+          <Text as="span" fontSize="12px" color={colors.text.secondary}>
+            Showing {current} of {total} {recordLabel}
+          </Text>
+        </ShowingRecordText>
 
       </div>
     )

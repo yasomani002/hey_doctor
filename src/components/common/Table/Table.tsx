@@ -46,6 +46,7 @@ interface TableProps<T> {
   isDraggable?: boolean;
   textAlign?: string;
   rowHeightPx?: number;
+  recordLabel?: string;
 }
 const Table = <T,>({
   config,
@@ -57,6 +58,7 @@ const Table = <T,>({
   hideShowColumnMenu = true,
   isDraggable = true,
   rowHeightPx,
+  recordLabel = "records",
 }: TableProps<T>) => {
   const bottomBarRef = useRef<HTMLDivElement | null>(null);
   const draggingColumnKeyRef = useRef<string | null>(null);
@@ -309,7 +311,7 @@ const Table = <T,>({
       <ShowingRecord
         ref={bottomBarRef}
         current={data.length || 0}
-        total={paginationProps?.total || 0}
+        total={paginationProps?.total ?? data.length ?? 0}
         page={paginationProps?.page || 1}
         pageSize={paginationProps?.pageSize || 25}
         onPageChange={paginationProps?.onPageChange}
@@ -317,6 +319,7 @@ const Table = <T,>({
         setRowsPerPageStatic={paginationProps?.setRowsPerPageStatic}
         columnVisibilityMenu={columnVisibilityMenu}
         paginationProps={paginationProps !== null ? true : false}
+        recordLabel={recordLabel}
       />
     </>
   );

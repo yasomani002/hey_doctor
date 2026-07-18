@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { colors } from "@/styles/colors";
 
 // Constants for table layout, adjust as needed
-export const ROLE_HEADER_HEIGHT_PX = 34;
-export const ROLE_ROW_HEIGHT_PX = 42; // Increased height for better touch target and spacing
+export const ROLE_HEADER_HEIGHT_PX = 44;
+export const ROLE_ROW_HEIGHT_PX = 56;
 
 export const RolesWrapper = styled.div`
   display: flex;
@@ -17,13 +17,18 @@ export const TableScrollArea = styled.div<{ heightPx: number }>`
   height: ${(props) => props.heightPx}px;
   overflow: auto;
   position: relative;
-  border-radius: 10px;
-  border: 1px solid ${colors.table.border}; 
-  background-color: ${colors.table.background}; 
+  border-radius: 12px;
+  border: 1px solid ${colors.table.border};
+  background-color: ${colors.table.background};
   overflow-x: scroll;
+  box-shadow: 0 2px 12px rgba(30, 58, 58, 0.07);
   &::-webkit-scrollbar {
     width: 6px;
     height: 0.3rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(30, 58, 58, 0.15);
+    border-radius: 4px;
   }
 `;
 
@@ -48,24 +53,25 @@ export const HeaderRow = styled.tr<{ rowHeightPx?: number }>`
   min-width: 100%;
   min-height: ${(props) => props.rowHeightPx || ROLE_HEADER_HEIGHT_PX}px;
   align-items: center;
-  background-color: ${colors.table.header};
+  background-color: #1e3a3a;
 `;
 
 export const HeaderCell = styled.th<{ minWidth: string; flexGrow: string, textAlign?: string }>`
   flex: ${(props) => props.flexGrow};
   min-width: ${(props) => props.minWidth};
-  padding: 8px 14px; ;
-  font-size: 0.850rem;
-  font-weight: 600; 
-  color:${colors.text.primary};
-  letter-spacing: 0.05em;
+  padding: 10px 14px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   background-color: transparent;
-  text-align:${(props) => props.textAlign};
+  text-align: ${(props) => props.textAlign};
   &:first-child {
-    padding-left: 1rem;
+    padding-left: 1.25rem;
   }
   &:last-child {
-    padding-right: 1rem;
+    padding-right: 1.25rem;
   }
 `;
 
@@ -87,33 +93,30 @@ export const BodyRow = styled.tr<{ translateYPx: number; isAlt: boolean; rowHeig
   }
   align-items: center;
   transform: translateY(${(props) => props.translateYPx}px);
-  background-color: ${colors.table.background}; 
-  border-bottom: 1px solid ${colors.table.border};
-  &:last-child {
-    /* border-bottom: none; */
-  }
+  background-color: #ffffff;
+  border-bottom: 1px solid #eff2f1;
   &:hover {
-    background-color: ${colors.table.hover};
-    transition: background-color 0.4s ease;
+    background-color: #f5faf8;
+    transition: background-color 0.15s ease;
   }
 `;
 
 export const BodyCell = styled.td<{ minWidth: string; flexGrow: string; textAlign?: string }>`
   flex: ${(props) => props.flexGrow};
   min-width: ${(props) => props.minWidth};
-  padding: 8px 14px; 
-  font-size: 0.850rem; 
+  padding: 10px 14px;
+  font-size: 0.825rem;
   color: ${colors.text.primary};
   align-items: center;
   p {
-   text-align:${(props) => props.textAlign || "left"};
+    text-align: ${(props) => props.textAlign || "left"};
   }
 
   &:first-child {
-    padding-left: 1rem;
+    padding-left: 1.25rem;
   }
   &:last-child {
-    padding-right: 1rem;
+    padding-right: 1.25rem;
   }
 `;
 
