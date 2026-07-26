@@ -3,7 +3,7 @@ import Header from "@/components/common/Header/Header";
 import SubHeader from "@/components/common/SubHeader/SubHeader";
 import { Button } from "@/components/ui/button";
 import useGetPatientHistoryList from "../hook/useGetPatientHistoryList";
-import PatientDetailsDrawe from "../component/PatientDetailsDrawe";
+import PatientDetailsDrawer from "../component/PatientDetailsDrawer";
 import { useState } from "react";
 
 const PatientHistoryPage = () => {
@@ -100,7 +100,7 @@ const PatientHistoryPage = () => {
                 emptyMessage="No Appointments Found"
             />
 
-            <PatientDetailsDrawe open={detailsDrawerOpen} onClose={() => setDetiailsDrawerOpen(false)} />
+            <PatientDetailsDrawer open={detailsDrawerOpen} onClose={() => setDetiailsDrawerOpen(false)} />
         </>
     );
 };
