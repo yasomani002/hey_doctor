@@ -7,6 +7,7 @@ import DashbaordPage from "@/features/dashboard/page/DashboardPage";
 import AppoinmentPage from "@/features/appointment/page/AppoinmentPage";
 import PatientHistoryPage from "@/features/patient_history/page/PatientHistoryPage";
 import EmployeePage from "@/features/staff_managment/employee/page/EmployeePage";
+import UserRolePage from "@/features/staff_managment/user_role/page/UserRolePage";
 
 const publicRoutes = [
     {
@@ -50,6 +51,11 @@ const privateRoutes = [
     {
         path: "/employees",
         element: <EmployeePage />,
+        submenu: [],
+    },
+    {
+        path: "/user-roles",
+        element: <UserRolePage />,
         submenu: [],
     },
 ];
