@@ -193,6 +193,53 @@ const dummyData = {
                     //     ]
                     // }
                 ]
+            },
+            {
+                "nav_menu_id": "staff_managment",
+                "nav_menu_name": "Staff Management",
+                "nav_path": "/staff-managment",
+                "is_active": true,
+                "is_visible": true,
+                "nav_order": 2,
+                "level": 1,
+                "actions": [
+                    1,
+                    2,
+                    3,
+                    4
+                ],
+                "sub_menu": [
+                    {
+                        "nav_menu_id": "employees",
+                        "nav_menu_name": "Employees",
+                        "nav_path": "/employees",
+                        "is_active": true,
+                        "is_visible": true,
+                        "nav_order": 1,
+                        "level": 2,
+                        "actions": [
+                            1,
+                            2,
+                            3,
+                            4
+                        ]
+                    },
+                    {
+                        "nav_menu_id": "user-roles",
+                        "nav_menu_name": "User Roles",
+                        "nav_path": "/user-roles",
+                        "is_active": true,
+                        "is_visible": true,
+                        "nav_order": 2,
+                        "level": 2,
+                        "actions": [
+                            1,
+                            2,
+                            3,
+                            4
+                        ]
+                    }
+                ]
             }
         ],
         "token": "eyJhbGciOiJIUzUxMiJ9.eyJ1c2VyX3JvbGUiOiJyb2xlX3NpbHZlciIsInN1YiI6ImluZm9AaG9zcGl0YWxtbmdtdC5jb20iLCJpYXQiOjE3NzcxMzU4MjMsImV4cCI6MTc3NzIyMjIyM30.bEK2W6wStk93wIC4TRVuzC-wrJaT7CMjAUppAQI79Bt6tZAvXicjPrLMF5Crk2AldmCYxsgLFmrRRJkdbEF2gA"

@@ -6,6 +6,7 @@ import { Suspense } from "react";
 import DashbaordPage from "@/features/dashboard/page/DashboardPage";
 import AppoinmentPage from "@/features/appointment/page/AppoinmentPage";
 import PatientHistoryPage from "@/features/patient_history/page/PatientHistoryPage";
+import EmployeePage from "@/features/staff_managment/employee/page/EmployeePage";
 
 const publicRoutes = [
     {
@@ -44,6 +45,11 @@ const privateRoutes = [
     {
         path: "/patient-history",
         element: <PatientHistoryPage />,
+        submenu: [],
+    },
+    {
+        path: "/employees",
+        element: <EmployeePage />,
         submenu: [],
     },
 ];
