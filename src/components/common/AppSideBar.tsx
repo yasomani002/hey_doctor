@@ -148,11 +148,11 @@ export function AppSidebar() {
                                                     const isSubActive = location.pathname === subItem.nav_path;
 
                                                     return (
-                                                        <SidebarMenuItem key={subItem.nav_menu_name} className="w-[75%] ml-11 mt-2">
+                                                        <SidebarMenuItem key={subItem.nav_sub_menu_id} className="w-[75%] ml-11 mt-2">
                                                             <SidebarMenuButton
                                                                 asChild
                                                                 isActive={isSubActive}
-                                                                tooltip={subItem.nav_menu_name}
+                                                                tooltip={subItem.nav_sub_menu_name}
                                                                 className={`rounded-sm transition-colors duration-200 ${isSubActive
                                                                     ? "bg-white text-[#265368]"
                                                                     : "text-white hover:bg-white hover:text-black"
@@ -162,7 +162,7 @@ export function AppSidebar() {
                                                                     <LucideListTree size={16} />
 
                                                                     <Text as="span" fontSize="13px" color="inherit">
-                                                                        {subItem.nav_menu_name}
+                                                                        {subItem.nav_sub_menu_name}
                                                                     </Text>
                                                                 </Link>
                                                             </SidebarMenuButton>

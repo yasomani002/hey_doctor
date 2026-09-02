@@ -3,13 +3,16 @@ import Header from "@/components/common/Header/Header";
 import SubHeader from "@/components/common/SubHeader/SubHeader";
 import { Button } from "@/components/ui/button";
 import useGetUserRoleList from "../hook/useGetUserRoleList";
+import { useNavigate } from "react-router-dom";
 
 const UserRolePage = () => {
+    const navigate = useNavigate();
+
     const { data, isLoading } = useGetUserRoleList();
     const userRoleData = data?.data?.data || [];
 
     const handleAddUserRole = () => {
-        console.log("Add User Role");
+        navigate("/user-roles/create");
     };
 
     const columns = [

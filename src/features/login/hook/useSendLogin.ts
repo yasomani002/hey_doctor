@@ -46,7 +46,7 @@ const dummyData = {
                 "sub_menu": []
             },
             {
-                "nav_menu_id": "appointment",
+                "nav_menu_id": "operations",
                 "nav_menu_name": "Operations",
                 "nav_path": "/appointment",
                 "is_active": true,
@@ -61,13 +61,14 @@ const dummyData = {
                 ],
                 "sub_menu": [
                     {
-                        "nav_menu_id": "appointment-appointments",
-                        "nav_menu_name": "Appointments",
+                        "nav_sub_menu_id": "appointment",
+                        "nav_sub_menu_name": "Appointments",
                         "nav_path": "/appointments",
                         "is_active": true,
                         "is_visible": false,
                         "nav_order": 1,
                         "level": 2,
+                        "parent_id": "operations",
                         "actions": [
                             1,
                             2,
@@ -76,13 +77,14 @@ const dummyData = {
                         ]
                     },
                     {
-                        "nav_menu_id": "patient-history",
-                        "nav_menu_name": "Patient History",
+                        "nav_sub_menu_id": "patient-history",
+                        "nav_sub_menu_name": "Patient History",
                         "nav_path": "/patient-history",
                         "is_active": true,
                         "is_visible": true,
                         "nav_order": 2,
                         "level": 2,
+                        "parent_id": "operations",
                         "actions": [
                             1,
                             2,
@@ -210,13 +212,14 @@ const dummyData = {
                 ],
                 "sub_menu": [
                     {
-                        "nav_menu_id": "employees",
-                        "nav_menu_name": "Employees",
+                        "nav_sub_menu_id": "employees",
+                        "nav_sub_menu_name": "Employees",
                         "nav_path": "/employees",
                         "is_active": true,
                         "is_visible": true,
                         "nav_order": 1,
                         "level": 2,
+                        "parent_id": "staff_managment",
                         "actions": [
                             1,
                             2,
@@ -225,13 +228,14 @@ const dummyData = {
                         ]
                     },
                     {
-                        "nav_menu_id": "user-roles",
-                        "nav_menu_name": "User Roles",
+                        "nav_sub_menu_id": "user-roles",
+                        "nav_sub_menu_name": "User Roles",
                         "nav_path": "/user-roles",
                         "is_active": true,
                         "is_visible": true,
                         "nav_order": 2,
                         "level": 2,
+                        "parent_id": "staff_managment",
                         "actions": [
                             1,
                             2,

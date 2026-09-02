@@ -1,14 +1,15 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
 export interface SubMenu {
-  nav_menu_id: string;
-  nav_menu_name: string;
+  nav_sub_menu_id: string;
+  nav_sub_menu_name: string;
   nav_path: string;
   is_active: boolean;
   is_visible: boolean;
   nav_order: number;
   level: number;
   actions: number[];
+  parent_id: string;
 }
 
 export interface Permission {

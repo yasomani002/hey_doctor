@@ -2,12 +2,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PrivateRoute from "./PrivetRoute";
 import LoginPage from "@/features/login/page/LoginPage";
 import Layout from "@/styles/Layout/Layout";
-import { Suspense } from "react";
+import { Fragment, Suspense } from "react";
 import DashbaordPage from "@/features/dashboard/page/DashboardPage";
 import AppoinmentPage from "@/features/appointment/page/AppoinmentPage";
 import PatientHistoryPage from "@/features/patient_history/page/PatientHistoryPage";
 import EmployeePage from "@/features/staff_managment/employee/page/EmployeePage";
 import UserRolePage from "@/features/staff_managment/user_role/page/UserRolePage";
+import CreateUserRolePage from "@/features/staff_managment/user_role/page/CreateUserRolePage";
 
 const publicRoutes = [
     {
@@ -28,20 +29,7 @@ const privateRoutes = [
     {
         path: "/appointments",
         element: <AppoinmentPage />,
-        submenu: [
-            {
-                path: "/appointments",
-                element: <AppoinmentPage />,
-            },
-            {
-                path: "/appointment/list",
-                element: <>Appointment List</>,
-            },
-            {
-                path: "/appointment/add",
-                element: <>Add Appointment</>,
-            },
-        ],
+        submenu: [],
     },
     {
         path: "/patient-history",
@@ -56,7 +44,12 @@ const privateRoutes = [
     {
         path: "/user-roles",
         element: <UserRolePage />,
-        submenu: [],
+        submenu: [
+            {
+                path: "/create",
+                element: <CreateUserRolePage />,
+            },
+        ],
     },
 ];
 
@@ -77,7 +70,7 @@ const AppRoutes = () => {
                 <Route element={<PrivateRoute />}>
                     <Route element={<Layout />}>
                         {privateRoutes.map((route) => (
-                            <>
+                            <Fragment key={route.path}>
                                 {/* Parent Route */}
                                 <Route
                                     key={route.path}
@@ -92,8 +85,8 @@ const AppRoutes = () => {
                                 {/* Submenu Routes */}
                                 {route.submenu?.map((subRoute) => (
                                     <Route
-                                        key={subRoute.path}
-                                        path={subRoute.path}
+                                        key={`${route.path}${subRoute.path}`}
+                                        path={`${route.path}${subRoute.path}`}
                                         element={
                                             <Suspense fallback={<div>loading...</div>}>
                                                 {subRoute.element}
@@ -101,7 +94,7 @@ const AppRoutes = () => {
                                         }
                                     />
                                 ))}
-                            </>
+                            </Fragment>
                         ))}
                     </Route>
                 </Route>
