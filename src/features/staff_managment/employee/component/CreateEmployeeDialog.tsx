@@ -13,6 +13,8 @@ import { CreateEmployeeSchema } from "../schema/index"
 import type z from "zod"
 import InputBox from "@/components/common/InputBox/InputBox"
 import { Input } from "@/components/ui/input"
+import useGetUserRoleList from "../../user_role/hook/useGetUserRoleList"
+import Select from "@/components/common/Select/Select"
 
 interface Props {
     open: boolean
@@ -22,6 +24,15 @@ interface Props {
 type TCreateEmployeeModel = z.infer<typeof CreateEmployeeSchema>
 
 const CreateEmployeeDialog = ({ open, onClose }: Props) => {
+    const { data, isLoading } = useGetUserRoleList();
+    const userRoleData = data?.data?.data || [];
+    const userRoleList = userRoleData.map((role) => {
+        return {
+            value: role.role_id,
+            label: role.role_name,
+        }
+    })
+
     const {
         register,
         handleSubmit,
@@ -34,6 +45,7 @@ const CreateEmployeeDialog = ({ open, onClose }: Props) => {
             employee_email: "",
             user_name: "",
             password: "",
+            role_id: "",
         },
     })
 
@@ -96,6 +108,20 @@ const CreateEmployeeDialog = ({ open, onClose }: Props) => {
                             />
                         </InputBox>
 
+                        {/* user role */}
+                        <InputBox
+                            label="User Role"
+                            error={errors.role_id?.message}
+                            required
+                        >
+                            <Select
+                                options={userRoleList}
+                                placeholder="Select Role"
+                                disabled={isLoading}
+                                {...register("role_id")}
+                            />
+                        </InputBox>
+
                         {/* user name */}
                         <InputBox
                             label="User Name"
@@ -110,19 +136,18 @@ const CreateEmployeeDialog = ({ open, onClose }: Props) => {
                         </InputBox>
 
                         {/* password */}
-                        <div className="col-span-2">
-                            <InputBox
-                                label="Password"
-                                error={errors.password?.message}
-                                required
-                            >
-                                <Input
-                                    type="password"
-                                    placeholder="Prasanth@123"
-                                    {...register("password")}
-                                />
-                            </InputBox>
-                        </div>
+                        <InputBox
+                            label="Password"
+                            error={errors.password?.message}
+                            required
+                        >
+                            <Input
+                                type="password"
+                                placeholder="Prasanth@123"
+                                {...register("password")}
+                            />
+                        </InputBox>
+
                     </div>
 
                     <DialogFooter showCloseButton>

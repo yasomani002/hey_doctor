@@ -1,9 +1,10 @@
-import { Table, Text } from "@/components/common";
+import { Table } from "@/components/common";
 import Header from "@/components/common/Header/Header";
 import SubHeader from "@/components/common/SubHeader/SubHeader";
 import { Button } from "@/components/ui/button";
 import useGetUserRoleList from "../hook/useGetUserRoleList";
 import { useNavigate } from "react-router-dom";
+import Dropdown from "@/components/common/Dropdown/Dropdown";
 
 const UserRolePage = () => {
     const navigate = useNavigate();
@@ -31,26 +32,27 @@ const UserRolePage = () => {
             render: (row: any) => row.role_name,
         },
         {
-            key: "role_code",
-            name: "Role Code",
-            minWidth: "150px",
-            flexGrow: "0.8",
-            render: (row: any) => <Text fontSize="12px">{row.role_code}</Text>,
-        },
-        {
-            key: "description",
-            name: "Description",
-            minWidth: "250px",
-            flexGrow: "1.2",
-            render: (row: any) => <Text fontSize="12px">{row.description}</Text>,
-        },
-        {
-            key: "created_at",
-            name: "Created At",
-            minWidth: "150px",
+            key: "actions",
+            name: "Actions",
+            minWidth: "100px",
             flexGrow: "0.5",
-            render: (row: any) => row.created_at,
-        },
+            render: (row: any) => (
+                <Dropdown
+                    actions={[
+                        {
+                            key: "edit",
+                            label: "Edit",
+                            onClick: () => { navigate(`/setting/user-role/update/${row.role_id}`) }
+                        },
+                        {
+                            key: "delete",
+                            label: "Delete",
+                            onClick: () => { }
+                        }
+                    ]}
+                />
+            ),
+        }
     ];
 
     return (
