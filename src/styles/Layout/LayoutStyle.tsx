@@ -35,14 +35,20 @@ export const MainContainer = styled.main`
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: auto;
   display: flex;
   flex: 1;
   flex-direction: column;
   min-width: 0;
   background-color: ${colors.theme.themeBg};
   padding:8px;
-  overflow: hidden;
+
+  /* Hide scrollbar — all browsers */
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE / Edge */
+  &::-webkit-scrollbar {
+    display: none;              /* Chrome / Safari / WebKit */
+  }
 
   @media (max-width: 768px) {
     width: 100%;

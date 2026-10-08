@@ -11,3 +11,13 @@ export const CreateAppoinmentSchema = z.object({
     symptoms: z.string().optional(),
 })
 
+export const BillPaymentSchema = z.object({
+    patient_name: z.string().min(1, "Patient name is required"),
+    bill_amount: z
+        .number({ message: "Amount must be a number" })
+        .positive("Amount must be greater than 0"),
+    payment_method: z.enum(["cash", "card", "upi"], {
+        message: "Payment method is required",
+    }),
+    notes: z.string().optional(),
+})

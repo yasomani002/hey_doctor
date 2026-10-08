@@ -50,6 +50,7 @@ const dummyData = {
                 "date_of_birth": "01/02/2003",
                 "gender": "Male",
                 "age": 30,
+                "status": "in_queue",
                 "appointment_notes": "Routine check-up",
                 "created_at": "2024-01-10T10:00:00Z",
                 "updated_at": "2024-01-10T10:00:00Z"
